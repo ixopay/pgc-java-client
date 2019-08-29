@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function __pgc_generate_realpath() {
+		[[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+function __pgc_generate_main() {
+	local SCRIPT="$(__pgc_generate_realpath "$0")"
+	local DIR="$(dirname "$SCRIPT")"
+
+	$DIR/gradlew shadowJar
+    java -jar $DIR/pgc-java-client-generator/build/libs/pgc-java-client-generator-1.0.jar --input-dir=$DIR/pgc-java-client-template $*
+}
+
+__pgc_generate_main $*

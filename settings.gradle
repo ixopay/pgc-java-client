@@ -1,0 +1,2 @@
+include 'pgc-java-client-generator'
+include 'pgc-java-client-template'
