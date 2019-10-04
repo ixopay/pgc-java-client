@@ -15,7 +15,7 @@ public class Renaming {
 		"pgc.client.model.result.ResultType",
 		"pgc.client.model.schedule.ScheduleRequestType",
 		"pgc.client.model.schedule.ScheduleResultType",
-		"pgc.client.model.status.StatusResultType",
+		"pgc.client.model.status_result.StatusResultType",
 		"pgc.client.model.status.StatusType",
 		"pgc.client.model.transaction.TransactionType"
 	};

@@ -1,57 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
 
-  <bindings scd="x-schema::tns" xmlns:tns="http://gateway.ixopay.com/Schema/V2/Options">
-    <schemaBindings map="false">
-      <package name="pgc.client.model.options"/>
-    </schemaBindings>
-    <bindings scd="~tns:optionsType">
-      <class ref="pgc.client.model.options.OptionsType"/>
-    </bindings>
-    <bindings scd="~tns:requestType">
-      <class ref="pgc.client.model.options.RequestType"/>
-    </bindings>
-    <bindings scd="~tns:responseType">
-      <class ref="pgc.client.model.options.ResponseType"/>
-    </bindings>
-    <bindings scd="~tns:parameterType">
-      <class ref="pgc.client.model.options.ParameterType"/>
-    </bindings>
-  </bindings>
-  <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/Schedule">
-    <schemaBindings map="false">
-      <package name="pgc.client.model.schedule"/>
-    </schemaBindings>
-    <bindings scd="~tns:scheduleRequestType">
-      <class ref="pgc.client.model.schedule.ScheduleRequestType"/>
-    </bindings>
-    <bindings scd="~tns:startScheduleType">
-      <class ref="pgc.client.model.schedule.StartScheduleType"/>
-    </bindings>
-    <bindings scd="~tns:showScheduleType">
-      <class ref="pgc.client.model.schedule.ShowScheduleType"/>
-    </bindings>
-    <bindings scd="~tns:pauseScheduleType">
-      <class ref="pgc.client.model.schedule.PauseScheduleType"/>
-    </bindings>
-    <bindings scd="~tns:cancelScheduleType">
-      <class ref="pgc.client.model.schedule.CancelScheduleType"/>
-    </bindings>
-    <bindings scd="~tns:continueScheduleType">
-      <class ref="pgc.client.model.schedule.ContinueScheduleType"/>
-    </bindings>
-    <bindings scd="~tns:periodUnitType">
-      <typesafeEnumClass ref="pgc.client.model.schedule.PeriodUnitType"/>
-    </bindings>
-  </bindings>
-  <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/Status">
-    <schemaBindings map="false">
-      <package name="pgc.client.model.status"/>
-    </schemaBindings>
-    <bindings scd="~tns:statusType">
-      <class ref="pgc.client.model.status.StatusType"/>
-    </bindings>
-  </bindings>
   <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/Callback">
     <schemaBindings map="false">
       <package name="pgc.client.model.callback"/>
@@ -114,60 +63,100 @@
       <typesafeEnumClass ref="pgc.client.model.callback.GenderType"/>
     </bindings>
   </bindings>
-  <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/StatusResult">
+  <bindings scd="x-schema::tns" xmlns:tns="http://gateway.ixopay.com/Schema/V2/Options">
     <schemaBindings map="false">
-      <package name="pgc.client.model.status"/>
+      <package name="pgc.client.model.options"/>
     </schemaBindings>
-    <bindings scd="~tns:statusResultType">
-      <class ref="pgc.client.model.status.StatusResultType"/>
+    <bindings scd="~tns:optionsType">
+      <class ref="pgc.client.model.options.OptionsType"/>
+    </bindings>
+    <bindings scd="~tns:requestType">
+      <class ref="pgc.client.model.options.RequestType"/>
+    </bindings>
+    <bindings scd="~tns:responseType">
+      <class ref="pgc.client.model.options.ResponseType"/>
+    </bindings>
+    <bindings scd="~tns:parameterType">
+      <class ref="pgc.client.model.options.ParameterType"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/Result">
+    <schemaBindings map="false">
+      <package name="pgc.client.model.result"/>
+    </schemaBindings>
+    <bindings scd="~tns:resultType">
+      <class ref="pgc.client.model.result.ResultType"/>
     </bindings>
     <bindings scd="~tns:extraDataType">
-      <class ref="pgc.client.model.status.ExtraDataType"/>
+      <class ref="pgc.client.model.result.ExtraDataType"/>
+    </bindings>
+    <bindings scd="~tns:returnType">
+      <class ref="pgc.client.model.result.ReturnType"/>
     </bindings>
     <bindings scd="~tns:errorsType">
-      <class ref="pgc.client.model.status.ErrorsType"/>
+      <class ref="pgc.client.model.result.ErrorsType"/>
     </bindings>
     <bindings scd="~tns:errorType">
-      <class ref="pgc.client.model.status.ErrorType"/>
+      <class ref="pgc.client.model.result.ErrorType"/>
     </bindings>
-    <bindings scd="~tns:chargebackDataType">
-      <class ref="pgc.client.model.status.ChargebackDataType"/>
-    </bindings>
-    <bindings scd="~tns:chargebackReversalDataType">
-      <class ref="pgc.client.model.status.ChargebackReversalDataType"/>
+    <bindings scd="~tns:customerProfileDataType">
+      <class ref="pgc.client.model.result.CustomerProfileDataType"/>
     </bindings>
     <bindings scd="~tns:returnDataType">
-      <class ref="pgc.client.model.status.ReturnDataType"/>
+      <class ref="pgc.client.model.result.ReturnDataType"/>
     </bindings>
     <bindings scd="~tns:creditcardDataType">
-      <class ref="pgc.client.model.status.CreditcardDataType"/>
+      <class ref="pgc.client.model.result.CreditcardDataType"/>
     </bindings>
     <bindings scd="~tns:phoneDataType">
-      <class ref="pgc.client.model.status.PhoneDataType"/>
+      <class ref="pgc.client.model.result.PhoneDataType"/>
     </bindings>
     <bindings scd="~tns:ibanDataType">
-      <class ref="pgc.client.model.status.IbanDataType"/>
+      <class ref="pgc.client.model.result.IbanDataType"/>
     </bindings>
-    <bindings scd="~tns:customerDataType">
-      <class ref="pgc.client.model.status.CustomerDataType"/>
+    <bindings scd="~tns:riskCheckDataType">
+      <class ref="pgc.client.model.result.RiskCheckDataType"/>
     </bindings>
-    <bindings scd="~tns:scheduleStatusType">
-      <typesafeEnumClass ref="pgc.client.model.status.ScheduleStatusType"/>
-    </bindings>
-    <bindings scd="~tns:transactionMethodType">
-      <typesafeEnumClass ref="pgc.client.model.status.TransactionMethodType"/>
-    </bindings>
-    <bindings scd="~tns:transactionStatusType">
-      <typesafeEnumClass ref="pgc.client.model.status.TransactionStatusType"/>
-    </bindings>
-    <bindings scd="~tns:threeDSecureType">
-      <typesafeEnumClass ref="pgc.client.model.status.ThreeDSecureType"/>
+    <bindings scd="~tns:returnTypeValues">
+      <typesafeEnumClass ref="pgc.client.model.result.ReturnTypeValues"/>
     </bindings>
     <bindings scd="~tns:returnDataTypeEnum">
-      <typesafeEnumClass ref="pgc.client.model.status.ReturnDataTypeEnum"/>
+      <typesafeEnumClass ref="pgc.client.model.result.ReturnDataTypeEnum"/>
     </bindings>
-    <bindings scd="~tns:genderType">
-      <typesafeEnumClass ref="pgc.client.model.status.GenderType"/>
+    <bindings scd="~tns:scheduleStatusType">
+      <typesafeEnumClass ref="pgc.client.model.result.ScheduleStatusType"/>
+    </bindings>
+    <bindings scd="~tns:riskCheckResultType">
+      <typesafeEnumClass ref="pgc.client.model.result.RiskCheckResultType"/>
+    </bindings>
+    <bindings scd="~tns:threeDSecureRequiredType">
+      <typesafeEnumClass ref="pgc.client.model.result.ThreeDSecureRequiredType"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/Schedule">
+    <schemaBindings map="false">
+      <package name="pgc.client.model.schedule"/>
+    </schemaBindings>
+    <bindings scd="~tns:scheduleRequestType">
+      <class ref="pgc.client.model.schedule.ScheduleRequestType"/>
+    </bindings>
+    <bindings scd="~tns:startScheduleType">
+      <class ref="pgc.client.model.schedule.StartScheduleType"/>
+    </bindings>
+    <bindings scd="~tns:showScheduleType">
+      <class ref="pgc.client.model.schedule.ShowScheduleType"/>
+    </bindings>
+    <bindings scd="~tns:pauseScheduleType">
+      <class ref="pgc.client.model.schedule.PauseScheduleType"/>
+    </bindings>
+    <bindings scd="~tns:cancelScheduleType">
+      <class ref="pgc.client.model.schedule.CancelScheduleType"/>
+    </bindings>
+    <bindings scd="~tns:continueScheduleType">
+      <class ref="pgc.client.model.schedule.ContinueScheduleType"/>
+    </bindings>
+    <bindings scd="~tns:periodUnitType">
+      <typesafeEnumClass ref="pgc.client.model.schedule.PeriodUnitType"/>
     </bindings>
   </bindings>
   <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/ScheduleResult">
@@ -185,6 +174,70 @@
     </bindings>
     <bindings scd="~tns:scheduleStatusType">
       <typesafeEnumClass ref="pgc.client.model.schedule.ScheduleStatusType"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/Status">
+    <schemaBindings map="false">
+      <package name="pgc.client.model.status"/>
+    </schemaBindings>
+    <bindings scd="~tns:statusType">
+      <class ref="pgc.client.model.status.StatusType"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/StatusResult">
+    <schemaBindings map="false">
+      <package name="pgc.client.model.status_result"/>
+    </schemaBindings>
+    <bindings scd="~tns:statusResultType">
+      <class ref="pgc.client.model.status_result.StatusResultType"/>
+    </bindings>
+    <bindings scd="~tns:extraDataType">
+      <class ref="pgc.client.model.status_result.ExtraDataType"/>
+    </bindings>
+    <bindings scd="~tns:errorsType">
+      <class ref="pgc.client.model.status_result.ErrorsType"/>
+    </bindings>
+    <bindings scd="~tns:errorType">
+      <class ref="pgc.client.model.status_result.ErrorType"/>
+    </bindings>
+    <bindings scd="~tns:chargebackDataType">
+      <class ref="pgc.client.model.status_result.ChargebackDataType"/>
+    </bindings>
+    <bindings scd="~tns:chargebackReversalDataType">
+      <class ref="pgc.client.model.status_result.ChargebackReversalDataType"/>
+    </bindings>
+    <bindings scd="~tns:returnDataType">
+      <class ref="pgc.client.model.status_result.ReturnDataType"/>
+    </bindings>
+    <bindings scd="~tns:creditcardDataType">
+      <class ref="pgc.client.model.status_result.CreditcardDataType"/>
+    </bindings>
+    <bindings scd="~tns:phoneDataType">
+      <class ref="pgc.client.model.status_result.PhoneDataType"/>
+    </bindings>
+    <bindings scd="~tns:ibanDataType">
+      <class ref="pgc.client.model.status_result.IbanDataType"/>
+    </bindings>
+    <bindings scd="~tns:customerDataType">
+      <class ref="pgc.client.model.status_result.CustomerDataType"/>
+    </bindings>
+    <bindings scd="~tns:scheduleStatusType">
+      <typesafeEnumClass ref="pgc.client.model.status_result.ScheduleStatusType"/>
+    </bindings>
+    <bindings scd="~tns:transactionMethodType">
+      <typesafeEnumClass ref="pgc.client.model.status_result.TransactionMethodType"/>
+    </bindings>
+    <bindings scd="~tns:transactionStatusType">
+      <typesafeEnumClass ref="pgc.client.model.status_result.TransactionStatusType"/>
+    </bindings>
+    <bindings scd="~tns:threeDSecureType">
+      <typesafeEnumClass ref="pgc.client.model.status_result.ThreeDSecureType"/>
+    </bindings>
+    <bindings scd="~tns:returnDataTypeEnum">
+      <typesafeEnumClass ref="pgc.client.model.status_result.ReturnDataTypeEnum"/>
+    </bindings>
+    <bindings scd="~tns:genderType">
+      <typesafeEnumClass ref="pgc.client.model.status_result.GenderType"/>
     </bindings>
   </bindings>
   <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/Transaction">
@@ -259,59 +312,6 @@
     </bindings>
     <bindings scd="~tns:periodUnitType">
       <typesafeEnumClass ref="pgc.client.model.transaction.PeriodUnitType"/>
-    </bindings>
-  </bindings>
-  <bindings scd="x-schema::tns" xmlns:tns="http://paymentgateway.cloud/Schema/V2/Result">
-    <schemaBindings map="false">
-      <package name="pgc.client.model.result"/>
-    </schemaBindings>
-    <bindings scd="~tns:resultType">
-      <class ref="pgc.client.model.result.ResultType"/>
-    </bindings>
-    <bindings scd="~tns:extraDataType">
-      <class ref="pgc.client.model.result.ExtraDataType"/>
-    </bindings>
-    <bindings scd="~tns:returnType">
-      <class ref="pgc.client.model.result.ReturnType"/>
-    </bindings>
-    <bindings scd="~tns:errorsType">
-      <class ref="pgc.client.model.result.ErrorsType"/>
-    </bindings>
-    <bindings scd="~tns:errorType">
-      <class ref="pgc.client.model.result.ErrorType"/>
-    </bindings>
-    <bindings scd="~tns:customerProfileDataType">
-      <class ref="pgc.client.model.result.CustomerProfileDataType"/>
-    </bindings>
-    <bindings scd="~tns:returnDataType">
-      <class ref="pgc.client.model.result.ReturnDataType"/>
-    </bindings>
-    <bindings scd="~tns:creditcardDataType">
-      <class ref="pgc.client.model.result.CreditcardDataType"/>
-    </bindings>
-    <bindings scd="~tns:phoneDataType">
-      <class ref="pgc.client.model.result.PhoneDataType"/>
-    </bindings>
-    <bindings scd="~tns:ibanDataType">
-      <class ref="pgc.client.model.result.IbanDataType"/>
-    </bindings>
-    <bindings scd="~tns:riskCheckDataType">
-      <class ref="pgc.client.model.result.RiskCheckDataType"/>
-    </bindings>
-    <bindings scd="~tns:returnTypeValues">
-      <typesafeEnumClass ref="pgc.client.model.result.ReturnTypeValues"/>
-    </bindings>
-    <bindings scd="~tns:returnDataTypeEnum">
-      <typesafeEnumClass ref="pgc.client.model.result.ReturnDataTypeEnum"/>
-    </bindings>
-    <bindings scd="~tns:scheduleStatusType">
-      <typesafeEnumClass ref="pgc.client.model.result.ScheduleStatusType"/>
-    </bindings>
-    <bindings scd="~tns:riskCheckResultType">
-      <typesafeEnumClass ref="pgc.client.model.result.RiskCheckResultType"/>
-    </bindings>
-    <bindings scd="~tns:threeDSecureRequiredType">
-      <typesafeEnumClass ref="pgc.client.model.result.ThreeDSecureRequiredType"/>
     </bindings>
   </bindings>
 </bindings>
