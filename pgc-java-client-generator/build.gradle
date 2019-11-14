@@ -19,8 +19,8 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-	implementation("com.squareup:javapoet:1.11.1")
 	implementation("commons-cli:commons-cli:1.4")
+	implementation('com.google.code.findbugs:jsr305:3.0.2')
 }
 
 def javaMainClass = 'com.ixopay.generator.IxopayClientGenerator'

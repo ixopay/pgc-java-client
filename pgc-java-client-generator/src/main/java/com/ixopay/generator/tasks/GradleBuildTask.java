@@ -1,22 +1,35 @@
 package com.ixopay.generator.tasks;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import com.ixopay.generator.model.GenerateContext;
+import com.ixopay.generator.model.Placeholders;
 
 public class GradleBuildTask implements GeneratorTask {
 
 	@Override public String describe( GenerateContext ctx ) {
-		return "Run ./gradlew xjc javadoc assemble";
+		if( ctx.gradleTasks.isEmpty() )
+			return "Skipping ./gradlew";
+		else
+			return String.format("Run ./gradlew %s", ctx.gradleTasks.stream().map(gradleTask -> gradleTask(gradleTask, ctx)).collect(Collectors.joining(", ")));
 	}
 
 	@Override public void run( GenerateContext ctx ) throws IOException {
 		try {
+			List<String> command = new ArrayList<>();
+			command.add(ctx.outputDir.resolve("gradlew").toAbsolutePath().toString());
+
+			for( String gradleTask : ctx.gradleTasks )
+				command.add(gradleTask(gradleTask, ctx));
+
 			final ProcessBuilder processBuilder = new ProcessBuilder()
 				.directory(ctx.outputDir.toFile())
-				.command(ctx.outputDir.resolve("gradlew").toAbsolutePath().toString(), "xjc", "javadoc", "assemble")
+				.command(command)
 				.redirectError(ProcessBuilder.Redirect.INHERIT)
 				.redirectOutput(ProcessBuilder.Redirect.INHERIT);
 
@@ -36,6 +49,10 @@ public class GradleBuildTask implements GeneratorTask {
 			Thread.currentThread().interrupt();
 			throw new RuntimeException(e);
 		}
+	}
+
+	private String gradleTask( String gradleTask, GenerateContext ctx ) {
+		return gradleTask.replace(Placeholders.directory_prefix_placeholder, ctx.renaming.name + "-");
 	}
 
 }

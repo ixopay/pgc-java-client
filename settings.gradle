@@ -1,2 +1,3 @@
 include 'pgc-java-client-generator'
 include 'pgc-java-client-template'
+includeBuild 'pgc-tokenization-android-template'

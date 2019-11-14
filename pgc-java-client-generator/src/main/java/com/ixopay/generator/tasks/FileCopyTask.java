@@ -12,6 +12,7 @@ import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import com.ixopay.generator.model.GenerateContext;
 import com.ixopay.generator.model.Placeholders;
@@ -21,7 +22,7 @@ import com.ixopay.generator.util.IO;
 public class FileCopyTask implements GeneratorTask {
 
 	private static final Set<String> ignored_dirs;
-	private static final Set<String> ignored_files;
+	private static final Pattern ignored_filename_pattern;
 	private static final Set<String> text_extensions;
 
 	static {
@@ -30,11 +31,7 @@ public class FileCopyTask implements GeneratorTask {
 		ignored_dirs.add(".gradle");
 		ignored_dirs.add(".idea");
 
-		ignored_files = new HashSet<>();
-		ignored_files.add(".eclipse");
-		ignored_files.add(".project");
-		ignored_files.add(".iml");
-		ignored_files.add(".ipr");
+		ignored_filename_pattern = Pattern.compile("(?!.*\\.(?!eclipse|project|iml|ipr))|local\\.properties");
 
 		text_extensions = new HashSet<>();
 		text_extensions.add(".gradle");
@@ -42,14 +39,20 @@ public class FileCopyTask implements GeneratorTask {
 		text_extensions.add(".md");
 		text_extensions.add(".xjb");
 		text_extensions.add(".xsd");
+		text_extensions.add(".xml");
+		text_extensions.add(".yml");
 	}
 
-	@Override public String describe(GenerateContext ctx) {
+	@Override public String describe( GenerateContext ctx ) {
 		return String.format("Copy project files from '%s' to '%s'", ctx.inputDir, ctx.outputDir);
 	}
 
 	@Override
 	public void run( GenerateContext ctx ) throws IOException {
+		runInternal(ctx, false);
+	}
+
+	private void runInternal( GenerateContext ctx, boolean isSubProject ) throws IOException {
 		final Renaming renaming = ctx.renaming;
 		final Path javaSources = ctx.inputDir.resolve(ctx.javaSourceBase);
 		final Path javaExampleSources = ctx.inputDir.resolve(ctx.javaExampleSourceBase);
@@ -58,24 +61,31 @@ public class FileCopyTask implements GeneratorTask {
 		final Path javaBasePackage = javaSources.resolve(Placeholders.package_placeholder_path);
 		final Path javaExampleBasePackage = javaExampleSources.resolve(Placeholders.package_placeholder_path);
 
-		if( !Files.exists(javaBasePackage) || !Files.isDirectory(javaBasePackage) )
+		if( Files.exists(javaSources) && (!Files.exists(javaBasePackage) || !Files.isDirectory(javaBasePackage)) )
 			throw new IllegalArgumentException(String.format("expected %s to contain package %s", javaSources, Placeholders.package_placeholder_path));
 
-		if( !Files.exists(javaExampleBasePackage) || !Files.isDirectory(javaExampleBasePackage) )
+		if( Files.exists(javaExampleSources) && (!Files.exists(javaExampleBasePackage) || !Files.isDirectory(javaExampleBasePackage)) )
 			throw new IllegalArgumentException(String.format("expected %s to contain package %s", javaExampleSources, Placeholders.package_placeholder_path));
 
-		if( !Files.exists(resourcesBasePackage) || !Files.isDirectory(resourcesBasePackage) )
+		if( Files.exists(resources) && (!Files.exists(resourcesBasePackage) || !Files.isDirectory(resourcesBasePackage)) )
 			throw new IllegalArgumentException(String.format("expected %s to contain package %s", resources, Placeholders.package_placeholder_path));
+
+		Set<Path> subProjects = new HashSet<>();
 
 		Files.walkFileTree(ctx.inputDir, new FileVisitor<Path>() {
 			@Override public FileVisitResult preVisitDirectory( Path dir, BasicFileAttributes attrs ) throws IOException {
 				if( Files.isSameFile(dir.getParent(), ctx.inputDir) && ignored_dirs.contains(dir.getFileName().toString()) )
 					return FileVisitResult.SKIP_SUBTREE;
 
+				if( !Files.isSameFile(dir, ctx.inputDir) && dir.getFileName().toString().startsWith(Placeholders.directory_prefix_placeholder) ) {
+					subProjects.add(dir);
+					return FileVisitResult.SKIP_SUBTREE;
+				}
+
 				return FileVisitResult.CONTINUE;
 			}
 			@Override public FileVisitResult visitFile( Path file, BasicFileAttributes attrs ) throws IOException {
-				if( !Files.isRegularFile(file) || ignored_files.contains(file.getFileName().toString()) )
+				if( !Files.isRegularFile(file) || isIgnoredFile(file) )
 					return FileVisitResult.CONTINUE;
 
 				Path newFile;
@@ -103,13 +113,16 @@ public class FileCopyTask implements GeneratorTask {
 				if( treatAsTextFile ) {
 					String content = new String(Files.readAllBytes(file), StandardCharsets.UTF_8);
 
-					content = content
-						.replace(Placeholders.host_placeholder, renaming.host)
-						.replace(Placeholders.gateway_host_placeholder, renaming.url.getHost())
+					content = content.replace(Placeholders.gateway_host_placeholder, renaming.url.getHost());
+					if( renaming.tokenizationUrl != null )
+						content = content.replace(Placeholders.tokenization_host_placeholder, renaming.tokenizationUrl.getHost());
+					content = content.replace(Placeholders.host_placeholder, renaming.host)
 						.replace(Placeholders.package_placeholder + ".", renaming.package_ + ".")
 						.replace(Placeholders.package_placeholder_path.toString() + "/", renaming.packagePath.toString() + "/")
+						.replace(Placeholders.snake_case_placeholder, renaming.snakeCase)
 						.replace(Placeholders.jaxb_classes_placeholder, renaming.jaxbReplacement())
 						.replace(Placeholders.name_placeholder, renaming.name)
+						.replace(Placeholders.product_name_placeholder, renaming.productName)
 						.replace(Placeholders.github_organization_placeholder, renaming.githubOrganization)
 						.replace(Placeholders.package_placeholder, renaming.package_);
 
@@ -134,10 +147,19 @@ public class FileCopyTask implements GeneratorTask {
 			}
 		});
 
-		// create settings.gradle in case a parent directory is already a gradle project so this becomes a new gradle project
-		final Path settingsGradle = ctx.outputDir.resolve("settings.gradle");
-		if( !Files.exists(settingsGradle) )
-			Files.createFile(settingsGradle);
+		if( !isSubProject ) {
+			// create settings.gradle in case a parent directory is already a gradle project so this becomes a new gradle project
+			final Path settingsGradle = ctx.outputDir.resolve("settings.gradle");
+			if( !Files.exists(settingsGradle) )
+				Files.createFile(settingsGradle);
+		}
+
+		for( Path subProject : subProjects )
+			runInternal(ctx.forSubProject(subProject), true);
+	}
+
+	private boolean isIgnoredFile( Path file ) {
+		return ignored_filename_pattern.matcher(file.getFileName().toString()).matches();
 	}
 
 

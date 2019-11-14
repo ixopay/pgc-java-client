@@ -2,6 +2,7 @@ package com.ixopay.generator.model;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class GenerateContext {
 	// relative
@@ -16,16 +17,25 @@ public class GenerateContext {
 	public final Path outputDir;
 	public final Renaming renaming;
 
-	private GenerateContext( Path javaSourceBase, Path javaExampleSourceBase, Path resourcesBase, Path inputDir, Path outputDir, Renaming renaming ) {
+	// settings
+	public final List<String> gradleTasks;
+
+	private GenerateContext( Path javaSourceBase, Path javaExampleSourceBase, Path resourcesBase, Path inputDir, Path outputDir, Renaming renaming, List<String> gradleTasks ) {
 		this.javaSourceBase = javaSourceBase;
 		this.javaExampleSourceBase = javaExampleSourceBase;
 		this.resourcesBase = resourcesBase;
 		this.inputDir = inputDir;
 		this.outputDir = outputDir;
 		this.renaming = renaming;
+		this.gradleTasks = gradleTasks;
 	}
 
-	public static GenerateContext from( Path inputDir, Path outputDir, Renaming renaming ) {
+	public GenerateContext forSubProject( Path subProjectDir ) {
+		Path subProjectOutputDir = outputDir.resolve(inputDir.relativize(subProjectDir).toString().replace(Placeholders.directory_prefix_placeholder, renaming.name + "-"));
+		return from(subProjectDir, subProjectOutputDir, renaming, gradleTasks);
+	}
+
+	public static GenerateContext from( Path inputDir, Path outputDir, Renaming renaming, List<String> gradleTasks ) {
 		final Path javaSourceBase = Paths.get("src", "main", "java");
 		final Path javaExampleSourceBase = Paths.get("src", "example", "java");
 		final Path resourcesBase = Paths.get("src", "main", "resources");
@@ -36,7 +46,8 @@ public class GenerateContext {
 			resourcesBase,
 			inputDir,
 			outputDir,
-			renaming
+			renaming,
+			gradleTasks
 		);
 	}
 }

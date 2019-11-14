@@ -1,0 +1,2 @@
+include ':pgcclient-tokenization-api'
+include ':pgcclient-tokenization-demoapp'
