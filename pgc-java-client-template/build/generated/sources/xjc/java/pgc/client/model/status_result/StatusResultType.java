@@ -1,46 +1,45 @@
 
-package pgc.client.model.callback;
+package pgc.client.model.status_result;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for callbackType complex type.
+ * <p>Java class for statusResultType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="callbackType"&gt;
+ * &lt;complexType name="statusResultType"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="result" type="{http://paymentgateway.cloud/Schema/V2/Callback}resultType"/&gt;
- *         &lt;element name="referenceId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="transactionId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="operationSuccess" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
+ *         &lt;element name="transactionStatus" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}transactionStatusType" minOccurs="0"/&gt;
+ *         &lt;element name="transactionUuid" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="merchantTransactionId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="purchaseId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="transactionType" type="{http://paymentgateway.cloud/Schema/V2/Callback}transactionMethodType" minOccurs="0"/&gt;
+ *         &lt;element name="transactionType" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}transactionMethodType" minOccurs="0"/&gt;
  *         &lt;element name="paymentMethod" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="amount" type="{http://paymentgateway.cloud/Schema/V2/Callback}amountType" minOccurs="0"/&gt;
- *         &lt;element name="currency" type="{http://paymentgateway.cloud/Schema/V2/Callback}currencyType" minOccurs="0"/&gt;
+ *         &lt;element name="amount" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}amountType" minOccurs="0"/&gt;
+ *         &lt;element name="currency" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}currencyType" minOccurs="0"/&gt;
  *         &lt;element name="scheduleId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="scheduleStatus" type="{http://paymentgateway.cloud/Schema/V2/Callback}scheduleStatusType" minOccurs="0"/&gt;
+ *         &lt;element name="scheduleStatus" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}scheduleStatusType" minOccurs="0"/&gt;
  *         &lt;element name="scheduleMerchantMetaData" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="customerProfile" type="{http://paymentgateway.cloud/Schema/V2/Callback}customerProfileDataType" minOccurs="0"/&gt;
- *         &lt;element name="errors" type="{http://paymentgateway.cloud/Schema/V2/Callback}errorsType" minOccurs="0"/&gt;
- *         &lt;element name="chargebackData" type="{http://paymentgateway.cloud/Schema/V2/Callback}chargebackDataType" minOccurs="0"/&gt;
- *         &lt;element name="chargebackReversalData" type="{http://paymentgateway.cloud/Schema/V2/Callback}chargebackReversalDataType" minOccurs="0"/&gt;
- *         &lt;element name="extraData" type="{http://paymentgateway.cloud/Schema/V2/Callback}extraDataType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="merchantMetaData" type="{http://paymentgateway.cloud/Schema/V2/Callback}merchantMetaDataType" minOccurs="0"/&gt;
- *         &lt;element name="returnData" type="{http://paymentgateway.cloud/Schema/V2/Callback}returnDataType" minOccurs="0"/&gt;
- *         &lt;element name="customerData" type="{http://paymentgateway.cloud/Schema/V2/Callback}customerDataType" minOccurs="0"/&gt;
+ *         &lt;element name="errors" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}errorsType" minOccurs="0"/&gt;
+ *         &lt;element name="chargebackData" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}chargebackDataType" minOccurs="0"/&gt;
+ *         &lt;element name="chargebackReversalData" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}chargebackReversalDataType" minOccurs="0"/&gt;
+ *         &lt;element name="extraData" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}extraDataType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="merchantMetaData" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}merchantMetaDataType" minOccurs="0"/&gt;
+ *         &lt;element name="returnData" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}returnDataType" minOccurs="0"/&gt;
+ *         &lt;element name="customerData" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}customerDataType" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -50,10 +49,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "callbackType", propOrder = {
-    "result",
-    "referenceId",
-    "transactionId",
+@XmlType(name = "statusResultType", propOrder = {
+    "operationSuccess",
+    "transactionStatus",
+    "transactionUuid",
+    "merchantTransactionId",
     "purchaseId",
     "transactionType",
     "paymentMethod",
@@ -62,7 +62,6 @@ import javax.xml.bind.annotation.XmlType;
     "scheduleId",
     "scheduleStatus",
     "scheduleMerchantMetaData",
-    "customerProfile",
     "errors",
     "chargebackData",
     "chargebackReversalData",
@@ -71,14 +70,14 @@ import javax.xml.bind.annotation.XmlType;
     "returnData",
     "customerData"
 })
-@XmlRootElement(name = "callback")
-public class CallbackType {
+@XmlRootElement(name = "statusResult")
+public class StatusResultType {
 
-    @XmlElement(required = true)
+    protected boolean operationSuccess;
     @XmlSchemaType(name = "string")
-    protected ResultType result;
-    protected String referenceId;
-    protected String transactionId;
+    protected TransactionStatusType transactionStatus;
+    protected String transactionUuid;
+    protected String merchantTransactionId;
     protected String purchaseId;
     @XmlSchemaType(name = "string")
     protected TransactionMethodType transactionType;
@@ -89,7 +88,6 @@ public class CallbackType {
     @XmlSchemaType(name = "string")
     protected ScheduleStatusType scheduleStatus;
     protected String scheduleMerchantMetaData;
-    protected CustomerProfileDataType customerProfile;
     protected ErrorsType errors;
     protected ChargebackDataType chargebackData;
     protected ChargebackReversalDataType chargebackReversalData;
@@ -102,7 +100,7 @@ public class CallbackType {
      * Default no-arg constructor
      * 
      */
-    public CallbackType() {
+    public StatusResultType() {
         super();
     }
 
@@ -110,10 +108,11 @@ public class CallbackType {
      * Fully-initialising value constructor
      * 
      */
-    public CallbackType(final ResultType result, final String referenceId, final String transactionId, final String purchaseId, final TransactionMethodType transactionType, final String paymentMethod, final BigDecimal amount, final String currency, final String scheduleId, final ScheduleStatusType scheduleStatus, final String scheduleMerchantMetaData, final CustomerProfileDataType customerProfile, final ErrorsType errors, final ChargebackDataType chargebackData, final ChargebackReversalDataType chargebackReversalData, final List<ExtraDataType> extraData, final String merchantMetaData, final ReturnDataType returnData, final CustomerDataType customerData) {
-        this.result = result;
-        this.referenceId = referenceId;
-        this.transactionId = transactionId;
+    public StatusResultType(final boolean operationSuccess, final TransactionStatusType transactionStatus, final String transactionUuid, final String merchantTransactionId, final String purchaseId, final TransactionMethodType transactionType, final String paymentMethod, final BigDecimal amount, final String currency, final String scheduleId, final ScheduleStatusType scheduleStatus, final String scheduleMerchantMetaData, final ErrorsType errors, final ChargebackDataType chargebackData, final ChargebackReversalDataType chargebackReversalData, final List<ExtraDataType> extraData, final String merchantMetaData, final ReturnDataType returnData, final CustomerDataType customerData) {
+        this.operationSuccess = operationSuccess;
+        this.transactionStatus = transactionStatus;
+        this.transactionUuid = transactionUuid;
+        this.merchantTransactionId = merchantTransactionId;
         this.purchaseId = purchaseId;
         this.transactionType = transactionType;
         this.paymentMethod = paymentMethod;
@@ -122,7 +121,6 @@ public class CallbackType {
         this.scheduleId = scheduleId;
         this.scheduleStatus = scheduleStatus;
         this.scheduleMerchantMetaData = scheduleMerchantMetaData;
-        this.customerProfile = customerProfile;
         this.errors = errors;
         this.chargebackData = chargebackData;
         this.chargebackReversalData = chargebackReversalData;
@@ -133,75 +131,91 @@ public class CallbackType {
     }
 
     /**
-     * Gets the value of the result property.
+     * Gets the value of the operationSuccess property.
+     * 
+     */
+    public boolean isOperationSuccess() {
+        return operationSuccess;
+    }
+
+    /**
+     * Sets the value of the operationSuccess property.
+     * 
+     */
+    public void setOperationSuccess(boolean value) {
+        this.operationSuccess = value;
+    }
+
+    /**
+     * Gets the value of the transactionStatus property.
      * 
      * @return
      *     possible object is
-     *     {@link ResultType }
+     *     {@link TransactionStatusType }
      *     
      */
-    public ResultType getResult() {
-        return result;
+    public TransactionStatusType getTransactionStatus() {
+        return transactionStatus;
     }
 
     /**
-     * Sets the value of the result property.
+     * Sets the value of the transactionStatus property.
      * 
      * @param value
      *     allowed object is
-     *     {@link ResultType }
+     *     {@link TransactionStatusType }
      *     
      */
-    public void setResult(ResultType value) {
-        this.result = value;
+    public void setTransactionStatus(TransactionStatusType value) {
+        this.transactionStatus = value;
     }
 
     /**
-     * Gets the value of the referenceId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getReferenceId() {
-        return referenceId;
-    }
-
-    /**
-     * Sets the value of the referenceId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setReferenceId(String value) {
-        this.referenceId = value;
-    }
-
-    /**
-     * Gets the value of the transactionId property.
+     * Gets the value of the transactionUuid property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getTransactionId() {
-        return transactionId;
+    public String getTransactionUuid() {
+        return transactionUuid;
     }
 
     /**
-     * Sets the value of the transactionId property.
+     * Sets the value of the transactionUuid property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setTransactionId(String value) {
-        this.transactionId = value;
+    public void setTransactionUuid(String value) {
+        this.transactionUuid = value;
+    }
+
+    /**
+     * Gets the value of the merchantTransactionId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMerchantTransactionId() {
+        return merchantTransactionId;
+    }
+
+    /**
+     * Sets the value of the merchantTransactionId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMerchantTransactionId(String value) {
+        this.merchantTransactionId = value;
     }
 
     /**
@@ -394,30 +408,6 @@ public class CallbackType {
      */
     public void setScheduleMerchantMetaData(String value) {
         this.scheduleMerchantMetaData = value;
-    }
-
-    /**
-     * Gets the value of the customerProfile property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CustomerProfileDataType }
-     *     
-     */
-    public CustomerProfileDataType getCustomerProfile() {
-        return customerProfile;
-    }
-
-    /**
-     * Sets the value of the customerProfile property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CustomerProfileDataType }
-     *     
-     */
-    public void setCustomerProfile(CustomerProfileDataType value) {
-        this.customerProfile = value;
     }
 
     /**

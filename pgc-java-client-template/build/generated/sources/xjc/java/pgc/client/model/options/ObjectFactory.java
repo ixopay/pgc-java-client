@@ -24,7 +24,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Options_QNAME = new QName("http://gateway.ixopay.com/Schema/V2/Options", "options");
+    private final static QName _Options_QNAME = new QName("http://paymentgateway.cloud/Schema/V2/Options", "options");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: pgc.client.model.options
@@ -73,7 +73,7 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link OptionsType }{@code >}
      */
-    @XmlElementDecl(namespace = "http://gateway.ixopay.com/Schema/V2/Options", name = "options")
+    @XmlElementDecl(namespace = "http://paymentgateway.cloud/Schema/V2/Options", name = "options")
     public JAXBElement<OptionsType> createOptions(OptionsType value) {
         return new JAXBElement<OptionsType>(_Options_QNAME, OptionsType.class, null, value);
     }

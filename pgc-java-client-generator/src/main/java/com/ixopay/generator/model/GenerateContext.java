@@ -7,6 +7,7 @@ import java.util.List;
 public class GenerateContext {
 	// relative
 	public final Path javaSourceBase;
+	public final Path javaTestSourceBase;
 	public final Path javaExampleSourceBase;
 	public final Path resourcesBase;
 
@@ -20,8 +21,9 @@ public class GenerateContext {
 	// settings
 	public final List<String> gradleTasks;
 
-	private GenerateContext( Path javaSourceBase, Path javaExampleSourceBase, Path resourcesBase, Path inputDir, Path outputDir, Renaming renaming, List<String> gradleTasks ) {
+	private GenerateContext( Path javaSourceBase, Path javaTestSourceBase, Path javaExampleSourceBase, Path resourcesBase, Path inputDir, Path outputDir, Renaming renaming, List<String> gradleTasks ) {
 		this.javaSourceBase = javaSourceBase;
+		this.javaTestSourceBase = javaTestSourceBase;
 		this.javaExampleSourceBase = javaExampleSourceBase;
 		this.resourcesBase = resourcesBase;
 		this.inputDir = inputDir;
@@ -37,11 +39,13 @@ public class GenerateContext {
 
 	public static GenerateContext from( Path inputDir, Path outputDir, Renaming renaming, List<String> gradleTasks ) {
 		final Path javaSourceBase = Paths.get("src", "main", "java");
+		final Path javaTestSourceBase = Paths.get("src", "test", "java");
 		final Path javaExampleSourceBase = Paths.get("src", "example", "java");
 		final Path resourcesBase = Paths.get("src", "main", "resources");
 
 		return new GenerateContext(
 			javaSourceBase,
+			javaTestSourceBase,
 			javaExampleSourceBase,
 			resourcesBase,
 			inputDir,

@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 
 public class Placeholders {
 	public static final String jaxb_classes_placeholder = "// JAXB_CLASSES";
-	public static final String gateway_host_placeholder = "gateway.client.pgc";
+	public static final String gateway_host_placeholder = "paymentgateway.cloud";
 	public static final String tokenization_host_placeholder = "secure.client.pgc";
 	public static final String directory_prefix_placeholder = "pgcclient-";
 	public static final String package_placeholder = "pgc";

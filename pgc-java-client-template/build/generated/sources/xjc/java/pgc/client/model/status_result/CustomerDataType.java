@@ -1,8 +1,6 @@
 
-package pgc.client.model.callback;
+package pgc.client.model.status_result;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
@@ -24,13 +22,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="firstName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="lastName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="birthDate" type="{http://www.w3.org/2001/XMLSchema}date" minOccurs="0"/&gt;
- *         &lt;element name="gender" type="{http://paymentgateway.cloud/Schema/V2/Callback}genderType" minOccurs="0"/&gt;
+ *         &lt;element name="gender" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}genderType" minOccurs="0"/&gt;
  *         &lt;element name="billingAddress1" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="billingAddress2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="billingCity" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="billingPostcode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="billingState" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="billingCountry" type="{http://paymentgateway.cloud/Schema/V2/Callback}countryType" minOccurs="0"/&gt;
+ *         &lt;element name="billingCountry" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}countryType" minOccurs="0"/&gt;
  *         &lt;element name="billingPhone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="shippingFirstName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="shippingLastName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
@@ -40,14 +38,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="shippingCity" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="shippingPostcode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="shippingState" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="shippingCountry" type="{http://paymentgateway.cloud/Schema/V2/Callback}countryType" minOccurs="0"/&gt;
+ *         &lt;element name="shippingCountry" type="{http://paymentgateway.cloud/Schema/V2/StatusResult}countryType" minOccurs="0"/&gt;
  *         &lt;element name="shippingPhone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="company" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="emailVerified" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
  *         &lt;element name="ipAddress" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="nationalId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="extraData" type="{http://paymentgateway.cloud/Schema/V2/Callback}extraDataType" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -84,8 +81,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "email",
     "emailVerified",
     "ipAddress",
-    "nationalId",
-    "extraData"
+    "nationalId"
 })
 public class CustomerDataType {
 
@@ -118,7 +114,6 @@ public class CustomerDataType {
     protected Boolean emailVerified;
     protected String ipAddress;
     protected String nationalId;
-    protected List<ExtraDataType> extraData;
 
     /**
      * Default no-arg constructor
@@ -132,7 +127,7 @@ public class CustomerDataType {
      * Fully-initialising value constructor
      * 
      */
-    public CustomerDataType(final String identification, final String firstName, final String lastName, final XMLGregorianCalendar birthDate, final GenderType gender, final String billingAddress1, final String billingAddress2, final String billingCity, final String billingPostcode, final String billingState, final String billingCountry, final String billingPhone, final String shippingFirstName, final String shippingLastName, final String shippingCompany, final String shippingAddress1, final String shippingAddress2, final String shippingCity, final String shippingPostcode, final String shippingState, final String shippingCountry, final String shippingPhone, final String company, final String email, final Boolean emailVerified, final String ipAddress, final String nationalId, final List<ExtraDataType> extraData) {
+    public CustomerDataType(final String identification, final String firstName, final String lastName, final XMLGregorianCalendar birthDate, final GenderType gender, final String billingAddress1, final String billingAddress2, final String billingCity, final String billingPostcode, final String billingState, final String billingCountry, final String billingPhone, final String shippingFirstName, final String shippingLastName, final String shippingCompany, final String shippingAddress1, final String shippingAddress2, final String shippingCity, final String shippingPostcode, final String shippingState, final String shippingCountry, final String shippingPhone, final String company, final String email, final Boolean emailVerified, final String ipAddress, final String nationalId) {
         this.identification = identification;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -160,7 +155,6 @@ public class CustomerDataType {
         this.emailVerified = emailVerified;
         this.ipAddress = ipAddress;
         this.nationalId = nationalId;
-        this.extraData = extraData;
     }
 
     /**
@@ -809,35 +803,6 @@ public class CustomerDataType {
      */
     public void setNationalId(String value) {
         this.nationalId = value;
-    }
-
-    /**
-     * Gets the value of the extraData property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extraData property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getExtraData().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ExtraDataType }
-     * 
-     * 
-     */
-    public List<ExtraDataType> getExtraData() {
-        if (extraData == null) {
-            extraData = new ArrayList<ExtraDataType>();
-        }
-        return this.extraData;
     }
 
 }

@@ -55,14 +55,19 @@ public class FileCopyTask implements GeneratorTask {
 	private void runInternal( GenerateContext ctx, boolean isSubProject ) throws IOException {
 		final Renaming renaming = ctx.renaming;
 		final Path javaSources = ctx.inputDir.resolve(ctx.javaSourceBase);
+		final Path javaTestSources = ctx.inputDir.resolve(ctx.javaTestSourceBase);
 		final Path javaExampleSources = ctx.inputDir.resolve(ctx.javaExampleSourceBase);
 		final Path resources = ctx.inputDir.resolve(ctx.resourcesBase);
 		final Path resourcesBasePackage = resources.resolve(Placeholders.package_placeholder_path);
 		final Path javaBasePackage = javaSources.resolve(Placeholders.package_placeholder_path);
+		final Path javaTestBasePackage = javaTestSources.resolve(Placeholders.package_placeholder_path);
 		final Path javaExampleBasePackage = javaExampleSources.resolve(Placeholders.package_placeholder_path);
 
 		if( Files.exists(javaSources) && (!Files.exists(javaBasePackage) || !Files.isDirectory(javaBasePackage)) )
 			throw new IllegalArgumentException(String.format("expected %s to contain package %s", javaSources, Placeholders.package_placeholder_path));
+
+		if( Files.exists(javaTestSources) && (!Files.exists(javaTestBasePackage) || !Files.isDirectory(javaTestBasePackage)) )
+			throw new IllegalArgumentException(String.format("expected %s to contain package %s", javaTestSources, Placeholders.package_placeholder_path));
 
 		if( Files.exists(javaExampleSources) && (!Files.exists(javaExampleBasePackage) || !Files.isDirectory(javaExampleBasePackage)) )
 			throw new IllegalArgumentException(String.format("expected %s to contain package %s", javaExampleSources, Placeholders.package_placeholder_path));
@@ -91,6 +96,8 @@ public class FileCopyTask implements GeneratorTask {
 				Path newFile;
 				if( file.startsWith(javaSources) )
 					newFile = ctx.outputDir.resolve(ctx.javaSourceBase).resolve(renaming.packagePath).resolve(javaBasePackage.relativize(file));
+				else if( file.startsWith(javaTestSources) )
+					newFile = ctx.outputDir.resolve(ctx.javaTestSourceBase).resolve(renaming.packagePath).resolve(javaTestBasePackage.relativize(file));
 				else if( file.startsWith(javaExampleSources) )
 					newFile = ctx.outputDir.resolve(ctx.javaExampleSourceBase).resolve(renaming.packagePath).resolve(javaExampleBasePackage.relativize(file));
 				else if( file.startsWith(resources) )
